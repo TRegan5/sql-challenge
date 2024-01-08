@@ -36,8 +36,6 @@ WHERE emp_no IN
     )
 );
 
-
-
 # 7. List each employee in the Sales and Development departments, including their employee number, last name, first name, and department name
 
 
