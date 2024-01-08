@@ -37,7 +37,29 @@ WHERE emp_no IN
 );
 
 # 7. List each employee in the Sales and Development departments, including their employee number, last name, first name, and department name
+SELECT emp_no, last_name, first_name,
+(SELECT dept_no.dept_name
+    FROM
+)
+FROM employees
+WHERE emp_no IN
+(
+    SELECT emp_no
+    FROM dept_emp
+    WHERE dept_no IN
+    (
+        SELECT dept_no
+        FROM departments
+        WHERE dept_name = 'Sales' or dept_name = 'Development'
+    )
+);
 
+SELECT dept_no,
+(SELECT dept_name
+    FROM departments
+    WHERE dept_name = 'Sales' or dept_name = 'Development') as "Department"
+FROM dept_emp
+;
 
 # 8. List the frequency counts, in descending order, of all the employee last names (that is, how many employees share each last name)
 SELECT last_name, COUNT(last_name) AS "frequency count"
