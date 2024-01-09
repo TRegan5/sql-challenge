@@ -11,10 +11,15 @@ FROM employees
 WHERE hire_date LIKE '%1986';
 
 # 3. List the manager of each department along with their department number, department name, employee number, last name, and first name
-
+SELECT mgr
 
 # 4. List the department number for each employee along with that employee’s employee number, last name, first name, and department name
-
+SELECT de.dept_no, e.emp_no, e.last_name, e.first_name, d.dept_name
+FROM employees as e
+LEFT JOIN dept_emp AS de
+ON de.emp_no = e.emp_no
+LEFT JOIN departments AS d
+ON de.dept_no = d.dept_no;
 
 # 5. List first name, last name, and sex of each employee whose first name is Hercules and whose last name begins with the letter B
 SELECT first_name, last_name, sex
