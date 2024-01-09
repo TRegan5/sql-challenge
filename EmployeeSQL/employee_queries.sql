@@ -2,7 +2,7 @@
 # 1. List the employee number, last name, first name, sex, and salary of each employee
 SELECT e.emp_no, e.last_name, e.first_name, e.sex, s.salary
 FROM employees e
-JOIN salaries s
+LEFT JOIN salaries s
 ON e.emp_no = s.emp_no;
 
 # 2. List the first name, last name, and hire date for the employees who were hired in 1986
@@ -48,29 +48,18 @@ WHERE emp_no IN
 );
 
 # 7. List each employee in the Sales and Development departments, including their employee number, last name, first name, and department name
-SELECT emp_no, last_name, first_name,
-(SELECT dept_no.dept_name
-    FROM
-)
-FROM employees
-WHERE emp_no IN
-(
-    SELECT emp_no
-    FROM dept_emp
-    WHERE dept_no IN
-    (
-        SELECT dept_no
-        FROM departments
-        WHERE dept_name = 'Sales' or dept_name = 'Development'
-    )
-);
+# Create a view to then query based on department name
+CREATE VIEW emp_dept_info AS
+SELECT de.emp_no, e.last_name, e.first_name, d.dept_name
+FROM dept_emp AS de
+LEFT JOIN employees as e
+ON de.emp_no = e.emp_no
+LEFT JOIN departments as d
+ON de.dept_no = d.dept_no;
 
-SELECT dept_no,
-(SELECT dept_name
-    FROM departments
-    WHERE dept_name = 'Sales' or dept_name = 'Development') as "Department"
-FROM dept_emp
-;
+SELECT *
+FROM emp_dept_info
+WHERE dept_name = 'Sales' OR  dept_name = 'Development';
 
 # 8. List the frequency counts, in descending order, of all the employee last names (that is, how many employees share each last name)
 SELECT last_name, COUNT(last_name) AS "frequency count"
