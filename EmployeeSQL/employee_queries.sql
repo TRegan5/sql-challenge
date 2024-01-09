@@ -18,7 +18,6 @@ ON dm.dept_no = d.dept_no
 LEFT JOIN employees as e
 ON dm.emp_no = e.emp_no;
 
-
 # 4. List the department number for each employee along with that employee’s employee number, last name, first name, and department name
 SELECT de.dept_no, e.emp_no, e.last_name, e.first_name, d.dept_name
 FROM employees as e
@@ -57,6 +56,7 @@ ON de.emp_no = e.emp_no
 LEFT JOIN departments as d
 ON de.dept_no = d.dept_no;
 
+# Qcreated view to find those employees in the Sales and Development departments
 SELECT *
 FROM emp_dept_info
 WHERE dept_name = 'Sales' OR  dept_name = 'Development';
