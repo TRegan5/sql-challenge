@@ -56,7 +56,7 @@ ON de.emp_no = e.emp_no
 LEFT JOIN departments as d
 ON de.dept_no = d.dept_no;
 
-# Qcreated view to find those employees in the Sales and Development departments
+# Query view to find those employees in the Sales and Development departments
 SELECT *
 FROM emp_dept_info
 WHERE dept_name = 'Sales' OR  dept_name = 'Development';
